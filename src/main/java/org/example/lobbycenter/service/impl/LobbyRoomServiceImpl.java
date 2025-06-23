@@ -1,7 +1,8 @@
 package org.example.lobbycenter.service.impl;
 
-import org.example.lobbycenter.pojo.Result;
+import org.example.common.pojo.Result;
 import org.example.lobbycenter.service.ILobbyRoomService;
+import org.example.lobbycenter.websocket.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -22,7 +24,8 @@ public class LobbyRoomServiceImpl implements ILobbyRoomService {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
+    @Resource
+    private WebSocket webSocket;
 
     @Override
     public Result createRoom(String ownerId, Integer maxPlayers) {
@@ -34,6 +37,7 @@ public class LobbyRoomServiceImpl implements ILobbyRoomService {
             异常处理 保证服务健壮性。
         * */
 
+        log.info("创建房间");
         //TODO 可以加入唯一性校验，每人只能创建一个房间
         // 生成房间ID
         if (ownerId == null || ownerId.trim().isEmpty()) {
@@ -218,7 +222,9 @@ public class LobbyRoomServiceImpl implements ILobbyRoomService {
     }
 
     @Override
-    public Result startGame(String roomId) {
+    public Result startGame(String roomId) throws IOException {
+        Set<String>  userIds = stringRedisTemplate.opsForZSet().range("room:" + roomId + ":players", 0, -1);
+        webSocket.sendMessageToUsers("游戏即将开始，房间号为" + roomId+",请点击开始进入游戏", userIds);
         return null;
     }
 

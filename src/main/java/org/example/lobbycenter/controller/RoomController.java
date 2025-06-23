@@ -1,13 +1,14 @@
 package org.example.lobbycenter.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.lobbycenter.pojo.Result;
-import org.example.lobbycenter.service.ILobbyMatchService;
+import org.example.common.pojo.Result;
 import org.example.lobbycenter.service.ILobbyRoomService;
 import org.example.lobbycenter.utils.GetUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/room")
@@ -71,7 +72,7 @@ public class RoomController {
      * @return 开始游戏结果
      */
     @PostMapping("/start")
-    public Result startGame( @RequestParam("roomId") String roomId) {
+    public Result startGame( @RequestParam("roomId") String roomId) throws IOException {
         return lobbyRoomService.startGame(roomId);
     }
 

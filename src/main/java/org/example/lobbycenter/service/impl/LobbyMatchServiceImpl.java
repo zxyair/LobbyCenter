@@ -3,7 +3,7 @@ package org.example.lobbycenter.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.example.lobbycenter.pojo.MatchEvent;
-import org.example.lobbycenter.pojo.Result;
+import org.example.common.pojo.Result;
 import org.example.lobbycenter.service.ILobbyMatchService;
 import org.springframework.stereotype.Service;
 import org.springframework.kafka.core.KafkaTemplate;

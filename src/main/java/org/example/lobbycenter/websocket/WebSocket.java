@@ -3,6 +3,7 @@ package org.example.lobbycenter.websocket;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +26,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value = "/connectWebSocket/{userId}")
 public class WebSocket {
 
-    private final StringRedisTemplate stringRedisTemplate;
+    private static StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate) {
+        WebSocket.stringRedisTemplate = stringRedisTemplate;
+    }
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * 在线人数
@@ -43,10 +50,6 @@ public class WebSocket {
      * 用户名称
      */
     private String userId;
-
-    public WebSocket(StringRedisTemplate stringRedisTemplate) {
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
 
     /**
      * 建立连接

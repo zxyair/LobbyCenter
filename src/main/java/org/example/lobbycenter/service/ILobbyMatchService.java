@@ -1,7 +1,7 @@
 package org.example.lobbycenter.service;
 
 
-import org.example.lobbycenter.pojo.Result;
+import org.example.common.pojo.Result;
 import org.springframework.stereotype.Service;
 
 @Service

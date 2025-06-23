@@ -2,7 +2,7 @@ package org.example.lobbycenter.event;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.example.lobbycenter.pojo.MatchEvent;
-import org.example.lobbycenter.pojo.Result;
+import org.example.common.pojo.Result;
 import org.example.lobbycenter.service.ILobbyRoomService;
 import org.example.lobbycenter.websocket.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import javax.annotation.Resource;
 
 import static org.example.lobbycenter.utils.KafkaConstants.MATCH_QUEUE_TOPIC;
-import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -83,7 +83,7 @@ public class KafkaMatchConsumer {
                         log.info("将用户{}添加到房间: {}", member, roomId);
                     }
                     // 4. 向所有用户发送房间信息
-                    webSocket.sendMessageToUsers(roomId, userIds);
+                    webSocket.sendMessageToUsers("匹配成功，房间号为" + roomId+",请点击开始进入游戏", userIds);
                 } catch (Exception e) {
                     log.error("创建房间或通知用户失败", e);
                 } finally {

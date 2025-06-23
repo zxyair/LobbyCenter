@@ -1,7 +1,7 @@
 package org.example.lobbycenter.controller;
 
 import org.example.lobbycenter.service.ILobbyMatchService;
-import org.example.lobbycenter.pojo.Result;
+import org.example.common.pojo.Result;
 import org.example.lobbycenter.utils.GetUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
