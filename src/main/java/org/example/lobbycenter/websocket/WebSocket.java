@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 @Component
-@ServerEndpoint(value = "/connectWebSocket/{userId}")
+@ServerEndpoint(value = "/api/connectWebSocket/{userId}")
 public class WebSocket {
 
     private static StringRedisTemplate stringRedisTemplate;
