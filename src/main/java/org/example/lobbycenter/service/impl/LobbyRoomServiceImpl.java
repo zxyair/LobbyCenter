@@ -312,6 +312,7 @@ public class LobbyRoomServiceImpl implements ILobbyRoomService {
             stringRedisTemplate.delete("hotpot:pool" + roomId);
 
         } catch (Exception e) {
+            log.error("解散房间失败", e);
             return Result.fail("解散房间失败，请稍后重试");
         }
         return Result.ok("房间已成功解散");

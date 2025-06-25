@@ -192,7 +192,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>org.example.usercenter.UserCenterApplication</mainClass>
+                    <mainClass>org.example.lobbycenter.LobbyCenterApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
